@@ -1,6 +1,26 @@
-from rest_framework import serializers
 
-class MovieSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    title = serializers.CharField()
-    year = serializers.DecimalField(max_digits=4, decimal_places=0)
+from rest_framework import serializers
+from storage.models import Movie, Actor, Director, Writer
+
+
+class MovieSerializer(serializers.ModelSerializer):
+    actor = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='full_name'
+    )
+    writer = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='full_name'
+    )
+    director = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='full_name'
+    )
+
+    class Meta:
+        model = Movie
+
+        fields = ['id', 'title', 'year', 'actor', 'director', 'writer']
