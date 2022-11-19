@@ -1,5 +1,5 @@
+from django.core.validators import MinValueValidator
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Actor(models.Model):
@@ -25,17 +25,20 @@ class Director(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
-    orginal_title = models.CharField(max_length=255, null=True)
-    year = models.DecimalField(max_digits=4,decimal_places=0, null=True)
-    runtime = models.DecimalField(max_digits=3, decimal_places=0, null=True)
-    genre = models.CharField(max_length=255, null=True)
-    language = models.CharField(max_length=255, null=True)
-    country = models.CharField(max_length=255, null=True)
-    poster = models.ImageField(null=True)
-    imdb_id = models.CharField(max_length=20, unique=True, null=True)
-    actor = models.ManyToManyField(Actor)
-    writer = models.ManyToManyField(Writer)
-    director = models.ManyToManyField(Director)
+    orginal_title = models.CharField(max_length=255, null=True, blank=True)
+    year = models.DecimalField(
+        max_digits=4, decimal_places=0, null=True, blank=True)
+    runtime = models.DecimalField(
+        max_digits=3, decimal_places=0, null=True, blank=True)
+    genre = models.CharField(max_length=255, null=True, blank=True)
+    language = models.CharField(max_length=255, null=True, blank=True)
+    country = models.CharField(max_length=255, null=True, blank=True)
+    poster = models.ImageField(null=True, blank=True)
+    imdb_id = models.CharField(
+        max_length=20, unique=True, null=True, blank=True)
+    actor = models.ManyToManyField(Actor, blank=True)
+    writer = models.ManyToManyField(Writer, blank=True)
+    director = models.ManyToManyField(Director, blank=True)
 
     def __str__(self) -> str:
         return self.title
