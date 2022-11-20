@@ -22,5 +22,22 @@ class MovieSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-
         fields = ['id', 'title', 'year', 'actor', 'director', 'writer']
+
+
+class ActorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Actor()
+        fields = ['id', 'full_name']
+
+
+class DirectorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Director()
+        fields = ['id', 'full_name']
+
+
+class WriterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Actor()
+        fields = ['id', 'full_name']
