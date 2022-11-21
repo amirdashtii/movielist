@@ -8,6 +8,9 @@ class Actor(models.Model):
     def __str__(self) -> str:
         return self.full_name
 
+    class Meta:
+        ordering = ['full_name']
+
 
 class Writer(models.Model):
     full_name = models.CharField(max_length=255)
@@ -15,12 +18,18 @@ class Writer(models.Model):
     def __str__(self) -> str:
         return self.full_name
 
+    class Meta:
+        ordering = ['full_name']
+
 
 class Director(models.Model):
     full_name = models.CharField(max_length=255)
 
     def __str__(self) -> str:
         return self.full_name
+
+    class Meta:
+        ordering = ['full_name']
 
 
 class Movie(models.Model):
