@@ -1,13 +1,12 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from rest_framework import status
 from .filters import MovieFilter
-from .models import Movie, Actor, Director, Writer
+from .models import Movie, Actor, Director, Writer, List
 from .pagination import DefaultPagination
-from .serializers import MovieSerializer, ActorSerializer, DirectorSerializer, WriterSerializer
+from .serializers import MovieSerializer, ActorSerializer, DirectorSerializer, WriterSerializer, ListSerializer
 
 
 class MovieViewSet(ModelViewSet):
@@ -35,3 +34,15 @@ class DirectorViewSet(ModelViewSet):
 class WriterViewSet(ModelViewSet):
     queryset = Writer.objects.all()
     serializer_class = WriterSerializer
+
+
+class ListViewSet(ModelViewSet):
+    serializer_class = ListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_staff:
+            return List.objects.all()
+        return List.objects.filter(user_id=user.id)

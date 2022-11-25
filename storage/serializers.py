@@ -1,6 +1,5 @@
-
 from rest_framework import serializers
-from storage.models import Movie, Actor, Director, Writer
+from .models import Movie, Actor, Director, Writer, List, ListItem
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -39,5 +38,21 @@ class DirectorSerializer(serializers.ModelSerializer):
 
 class WriterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Actor()
+        model = Writer()
         fields = ['id', 'full_name']
+
+
+class ListItemSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer()
+
+    class Meta:
+        model = ListItem
+        fields = ['id', 'movie']
+
+
+class ListSerializer(serializers.ModelSerializer):
+    items = ListItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = List
+        fields = ['user', 'id', 'name', 'description', 'items']
