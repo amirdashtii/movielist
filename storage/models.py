@@ -1,4 +1,3 @@
-from django.core.validators import MinValueValidator
 from django.conf import settings
 from django.db import models
 
@@ -58,9 +57,9 @@ class Movie(models.Model):
 
 
 class List(models.Model):
-    name = models.CharField(max_length=255)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.PROTECT)
+    name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
 
 
@@ -69,9 +68,3 @@ class ListItem(models.Model):
         List, on_delete=models.PROTECT, related_name='items')
     movie = models.ForeignKey(
         Movie, on_delete=models.PROTECT, related_name='listitems')
-    # actor = models.ForeignKey(
-    #     Actor, on_delete=models.PROTECT, related_name='listitems')
-    # director = models.ForeignKey(
-    #     Director, on_delete=models.PROTECT, related_name='listitems')
-    # writer = models.ForeignKey(
-    #     Writer, on_delete=models.PROTECT, related_name='listitems')
