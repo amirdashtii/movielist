@@ -6,3 +6,7 @@ MYSQL_DB_NAME = 'your db name'
 MYSQL_HOST = 'your host'
 MYSQL_USER = 'your user'
 MYSQL_PASSWORD = 'your password'
+
+
+apikey = 'yout api'
+# url = 'http://www.omdbapi.com/'
