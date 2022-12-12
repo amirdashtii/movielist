@@ -10,3 +10,7 @@ MYSQL_PASSWORD = 'your password'
 
 apikey = 'yout api'
 # url = 'http://www.omdbapi.com/'
+
+
+EMAIL_HOST_USER = 'your host email.'
+EMAIL_HOST_PASSWORD = 'uour host password'
